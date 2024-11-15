@@ -1,40 +1,46 @@
 version: '3.8'
 services:
-  backend:
+  order-backend:
     hostname: order-backend-${GITHUB_USER}
+    environment:
+      - GITHUB_USER=${GITHUB_USER}
     build:
       context: .
-      dockerfile: ./backend/Dockerfile
-    image: shop/backend:latest
+      dockerfile: ./order-backend/Dockerfile
+    image: shop/order-backend:latest
     depends_on:
-      - quotes
+      - order-quotes
     ports:
       - "54040:54040"
       - "54041:54041"
     networks:
       - app-network
 
-  frontend:
+  order-api:
     hostname: order-api-${GITHUB_USER}
+    environment:
+      - GITHUB_USER=${GITHUB_USER}
     build:
       context: .
-      dockerfile: ./frontend/Dockerfile
+      dockerfile: ./order-api/Dockerfile
       args:
         DT_CODE_MODULE: "${DT_ENVIRONMENT_HOST}/linux/oneagent-codemodules:java"
-    image: shop/frontend:latest
+    image: shop/order-api:latest
     depends_on:
-      - backend
+      - order-backend
     ports:
       - "54039:54039"
     networks:
       - app-network
 
-  quotes:
+  order-quotes:
     hostname: order-quotes-${GITHUB_USER}
+    environment:
+      - GITHUB_USER=${GITHUB_USER}
     build:
       context: .
-      dockerfile: ./quotes/Dockerfile
-    image: shop/quotes:latest
+      dockerfile: ./order-quotes/Dockerfile
+    image: shop/order-quotes:latest
     depends_on:
       - opentelemetry-collector
     ports:
@@ -48,7 +54,7 @@ services:
       dockerfile: ./loadgen/Dockerfile
     image: shop/loadgen:latest
     depends_on:
-      - frontend
+      - order-api
     networks:
       - app-network
 
