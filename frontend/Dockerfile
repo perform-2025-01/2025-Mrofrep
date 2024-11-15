@@ -1,4 +1,5 @@
 ARG DT_CODE_MODULE
+ARG GITHUB_USER
 
 FROM maven:3.8.5-openjdk-17-slim AS build
 WORKDIR /app
@@ -15,7 +16,7 @@ ENV LD_PRELOAD=/opt/dynatrace/oneagent/agent/lib64/liboneagentproc.so
 ENV OTEL_PROPAGATORS=tracecontext
 ENV OTEL_TRACES_EXPORTER=none
 
-ENV OTEL_SERVICE_NAME=order-api
+ENV OTEL_SERVICE_NAME=order-api-${GITHUB_USER}
 ENV OTEL_METRICS_EXPORTER=otlp
 ENV OTEL_EXPORTER_OTLP_METRICS_PROTOCOL=http/protobuf
 ENV OTEL_EXPORTER_OTLP_METRICS_ENDPOINT=http://opentelemetry-collector:4318/v1/metrics
