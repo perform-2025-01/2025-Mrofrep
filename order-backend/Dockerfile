@@ -1,3 +1,5 @@
+ARG GITHUB_USER
+
 FROM maven:3.8.5-openjdk-17-slim AS build
 WORKDIR /app
 COPY . /app
@@ -6,7 +8,7 @@ RUN mvn clean install -DskipTests -B
 FROM openjdk:17.0.1-jdk-slim
 
 ENV OTEL_JAVA_GLOBAL_AUTOCONFIGURE_ENABLED=true
-ENV OTEL_SERVICE_NAME=order-backend
+ENV OTEL_SERVICE_NAME=order-backend-${GITHUB_USER}
 ENV OTEL_EXPORTER_OTLP_PROTOCOL=http/protobuf
 ENV OTEL_PROPAGATORS=tracecontext
 
