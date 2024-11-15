@@ -15,8 +15,8 @@
 
     <modules>
         <module>common</module>
-        <module>frontend</module>
-        <module>backend</module>
+        <module>order-api</module>
+        <module>order-backend</module>
         <module>loadgen</module>
     </modules>
 

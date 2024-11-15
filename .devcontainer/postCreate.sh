@@ -34,7 +34,7 @@ sed -i "s/#alias ll='ls -l'/alias ll='ls -al'/g" ~/.bashrc
 # Download OpenTelemetry Java Auto Instrumentation Agent
 wget https://github.com/open-telemetry/opentelemetry-java-instrumentation/releases/latest/download/opentelemetry-javaagent.jar
 
-sudo nohup dockerd &
+sudo nohup dockerd > /dev/null 2>&1 &
 # Log into the docker registry hosted by the environment
 docker login https://$DT_ENVIRONMENT_HOST --username $ENVIRONMENT_ID --password $DT_API_TOKEN
 # docker-compose up -d --build

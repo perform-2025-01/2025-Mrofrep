@@ -5,7 +5,7 @@ FROM python:3.10-slim
 WORKDIR /app
 
 # Copy the requirements file to the working directory
-COPY quotes/requirements.txt .
+COPY order-quotes/requirements.txt .
 
 # Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
@@ -17,4 +17,4 @@ COPY . /app
 EXPOSE 8090
 
 # Define the command to run your app
-CMD ["python", "quotes/main.py"]
+CMD ["python", "order-quotes/main.py"]

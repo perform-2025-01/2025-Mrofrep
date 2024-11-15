@@ -29,6 +29,6 @@ ENV OTEL_EXPORTER_OTLP_LOGS_ENDPOINT=http://opentelemetry-collector:4318/v1/logs
 # ENV OTEL_EXPORTER_OTLP_LOGS_HEADERS=Authorization=Api-Token dt0c01.########################.################################################################
 
 WORKDIR /app
-COPY --from=build /app/frontend/target/frontend-1.0-SNAPSHOT-all.jar frontend.jar
+COPY --from=build /app/order-api/target/order-api-1.0-SNAPSHOT-all.jar order-api.jar
 
-ENTRYPOINT ["java", "-jar", "frontend.jar"]
+ENTRYPOINT ["java", "-jar", "order-api.jar"]
